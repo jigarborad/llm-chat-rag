@@ -122,4 +122,4 @@ dmypy.json
 cython_debug/
 
 # Ignore folders starting with "VectorStore_"
-VectorStore_*/
+VectorStore*/
