@@ -21,17 +21,17 @@ def chat_with_llm():
         index=None,
         placeholder="Select model...",)
     if option == "gpt_3_5_turbo_openai":
-        utils.get_openai_key()
+        openai_api_key = utils.get_openai_key()
         vector_store_path, chunks, uploaded_file = data_manager.pdf_uploader()
         if uploaded_file is not None:
-            VectorStore = open_ai_embedding(vector_store_path, chunks)
+            VectorStore = open_ai_embedding(vector_store_path, chunks, openai_api_key)
             st.success(f'PDF "{uploaded_file.name}" uploaded and processed successfully!')
 
             # Input for the query
             query = st.text_input("Shoot your question related to the PDF")
 
             if query:
-                response = gpt_turbo_3_5(query, VectorStore)
+                response = gpt_turbo_3_5(query, VectorStore, openai_api_key)
                 st.markdown(f'<div class="fade-in">{response}</div>', unsafe_allow_html=True)
 
 def main():
