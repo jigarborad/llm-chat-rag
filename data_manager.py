@@ -1,10 +1,12 @@
 import streamlit as st
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from PyPDF2 import PdfReader
+from css import styles
 
 def pdf_uploader():
     # Uploading the PDF file
-    uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
+    #st.markdown(styles.upload_banner, unsafe_allow_html=True)
+    uploaded_file = st.file_uploader("Upload The PDF file", type="pdf")
     if uploaded_file is not None:
         # Extract text from the uploaded PDF
         pdf_reader = PdfReader(uploaded_file)

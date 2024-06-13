@@ -2,6 +2,9 @@
 
 Welcome to the LLM Chat App, a powerful and interactive web application that allows you to chat with a Language Model (LLM) and ask questions about the content of uploaded PDF files. The app leverages the capabilities of Streamlit, LangChain, OpenAI, and FAISS to provide an intuitive and user-friendly experience.
 
+**Access this app using following web address**
+- [LLM Chat Ragg applictaion](https://llmchatrag.streamlit.app/)
+    - ⚠️ Note: We do not save your secret key anywhere so its safe to enter your key
 ## Features ✨
 
 - **Upload PDFs:** Easily upload your PDF documents for processing.

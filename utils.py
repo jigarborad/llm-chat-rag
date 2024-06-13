@@ -1,15 +1,13 @@
-import os
 import streamlit as st
-from dotenv import load_dotenv
 
 def get_openai_key():
-    #load_dotenv()
-    openai_api_key = os.getenv('OPENAI_API_KEY')
+    if 'openai_api_key' not in st.session_state:
+        st.session_state.openai_api_key = ''
+        st.session_state.api_key_invalid = False  # Track if API key is invalid
 
-    #if not openai_api_key:
-    openai_api_key = st.text_input("Enter your OpenAI API Key", type="password")
-    # if openai_api_key:
-    #    with open('.env', 'a') as f:
-    #        f.write(f'OPENAI_API_KEY={openai_api_key}\n')
-    #load_dotenv()
-    return openai_api_key
+    if not st.session_state.openai_api_key:
+        if st.session_state.api_key_invalid:
+            st.error("Invalid API key. Please enter a valid OpenAI API key.")
+        st.session_state.openai_api_key = st.text_input(
+            "Enter your OpenAI API Key", type="password"
+        )
