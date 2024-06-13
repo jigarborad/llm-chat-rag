@@ -1,5 +1,6 @@
 import streamlit as st
-from css import styles, sidebar
+from css import styles
+from css.sidebar import render_sidebar
 from chat import chat
 
 def main():
@@ -10,9 +11,10 @@ def main():
     st.markdown(styles.custom_css, unsafe_allow_html=True)
 
     # Sidebar contents
-    sidebar.render_sidebar()
+    option, api_key = render_sidebar()
+
     st.markdown(styles.header, unsafe_allow_html=True)
-    chat()
+    chat(api_key, option)
 
 if __name__ == "__main__":
     main()

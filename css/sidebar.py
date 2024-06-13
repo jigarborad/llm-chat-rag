@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit_extras.add_vertical_space import add_vertical_space
+import utils
 
 def render_sidebar():
     with st.sidebar:
@@ -13,4 +14,21 @@ def render_sidebar():
                     - OpenAI
                     ''')
         add_vertical_space(5)
-        st.write("Made with ❤️ by [Jigar](https://github.com/jigarborad)")
+
+        # Model selection
+        with st.expander("Model Selection and API Key Input",  expanded=True):
+            option = st.selectbox(
+                label="Which model do you want to use?",
+                options=("gpt_3_5_turbo_openai", None),
+                placeholder="Select model...",
+            )
+
+            # API key input
+            if option:    
+                utils.get_openai_key()
+                if not st.session_state.openai_api_key:
+                    st.warning("Please enter your OpenAI API Key")
+                else:
+                    st.write("API Key entered successfully!")
+
+        return option, st.session_state.openai_api_key
