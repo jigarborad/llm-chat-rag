@@ -51,11 +51,11 @@ custom_css = """
     </style>
 """
 
-upload_banner="""
-        <div class="card fade-in">
-            <h2>Upload your PDF</h2>
-            <p>Upload a PDF file and ask questions related to its content.</p>
-        </div>
-    """
+upload_banner = """
+    <div class="card fade-in">
+        <h2>Upload your PDF</h2>
+        <p>Upload a PDF file and ask questions related to its content.</p>
+    </div>
+"""
 
 header = """<h1 class="fade-in">Chat with LLM &#x1F916;</h1>"""

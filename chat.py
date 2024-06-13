@@ -1,21 +1,43 @@
 import streamlit as st
-import utils
-import data_manager
-from open_ai_models import open_ai_embedding, gpt_turbo_3_5
+from data_manager import DataManager
+from open_ai_models import OpenAIModel
+from groq_models import GroqModel
 import openai
 import time
+class ChatApp:
+    def __init__(self, api_key, model_name):
+        self.api_key = api_key
+        self.model_name = model_name
+        self.model = None
+        self.vector_store = None
 
-def response_generator(response):
-    for word in response.split():
-        yield word + " "
-        time.sleep(0.05)
+    def response_generator(self, response):
+        for word in response.split():
+            yield word + " "
+            time.sleep(0.05)
 
-def chat(api_key, option):
-    if option == "gpt_3_5_turbo_openai" and api_key:
-        vector_store_path, chunks, uploaded_file = data_manager.pdf_uploader()
+    def load_model(self):
+        if self.model_name in OpenAIModel(self.api_key).get_available_models():
+            self.model = OpenAIModel(self.api_key)
+            self.vector_store = self.model.open_ai_embedding(self.vector_store_path, self.chunks)
+        elif self.model_name in GroqModel(self.api_key).get_available_models():
+            self.model = GroqModel(self.api_key)
+            self.vector_store = self.model.local_embedding(self.vector_store_path, self.chunks)
+        else:
+            st.error("Selected model is not available.")
+            return False
+        return True
+    
+    def run(self):
+        vector_store_path, chunks, uploaded_file = DataManager.pdf_uploader()
         if uploaded_file is not None:
-            VectorStore = open_ai_embedding(vector_store_path, chunks, api_key)
+            self.vector_store_path = vector_store_path
+            self.chunks = chunks
+            if not self.load_model():
+                return
+
             st.success(f'PDF "{uploaded_file.name}" uploaded and processed successfully!')
+
             # Initialize chat history
             if "messages" not in st.session_state:
                 st.session_state.messages = []
@@ -24,6 +46,7 @@ def chat(api_key, option):
             for message in st.session_state.messages:
                 with st.chat_message(message["role"]):
                     st.markdown(message["content"])
+
             # Accept user input
             if prompt := st.chat_input("What is up?"):
                 try:
@@ -32,11 +55,12 @@ def chat(api_key, option):
                     # Display user message in chat message container
                     with st.chat_message("user"):
                         st.markdown(prompt)
+
                     # Display assistant response in chat message container
-                    response = gpt_turbo_3_5(prompt, VectorStore, api_key)
+                    response = self.model.query_model(self.model_name, prompt, self.vector_store)
                     with st.chat_message("assistant"):
-                        st.write_stream(response_generator(response))
-                        # st.markdown(response)
+                        st.write_stream(self.response_generator(response))
+                    
                     st.session_state.messages.append({"role": "assistant", "content": response})
                 except openai.OpenAIError as e:
                     st.error(f"Error: {str(e)}. Please check your API key and try again.")

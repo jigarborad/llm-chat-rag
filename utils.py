@@ -1,18 +1,13 @@
 import streamlit as st
 
-def validate_openai_key(api_key):
-    """Check if the API key starts with 'sk-'."""
-    return api_key.startswith("sk-")
-
 def get_openai_key():
     if 'openai_api_key' not in st.session_state:
         st.session_state.openai_api_key = ''
-        st.session_state.api_key_invalid = False  # Track if API key is invalid
+        st.session_state.api_key_invalid = False
 
-    # Generate a unique key for the text input widget
     input_key = "openai_api_key_input"
     api_key_input = None
-    # Display input field for API key with a unique key
+
     if not st.session_state.openai_api_key:
         api_key_input = st.text_input(
             label="Enter your OpenAI API Key",
@@ -21,12 +16,38 @@ def get_openai_key():
         ).strip()
 
     if api_key_input:
-        if validate_openai_key(api_key_input):
+        if api_key_input.startswith("sk-"):
             st.session_state.openai_api_key = api_key_input
-            st.session_state.api_key_invalid = False  # Reset invalid flag
+            st.session_state.api_key_invalid = False
         else:
             st.session_state.api_key_invalid = True
             st.error("Invalid API key. Please enter a valid OpenAI API key starting with 'sk-'.")
-            st.session_state.openai_api_key = ''  # Clear the key
+            st.session_state.openai_api_key = ''
 
     return st.session_state.openai_api_key
+
+def get_groq_key():
+    if 'groq_api_key' not in st.session_state:
+        st.session_state.groq_api_key = ''
+        st.session_state.api_key_invalid = False
+
+    input_key = "groq_api_key_input"
+    api_key_input = None
+
+    if not st.session_state.groq_api_key:
+        api_key_input = st.text_input(
+            label="Enter your Groq API Key",
+            key=input_key,
+            type="password"
+        ).strip()
+
+    if api_key_input:
+        if len(api_key_input) > 0:  # Add your Groq API key validation logic here
+            st.session_state.groq_api_key = api_key_input
+            st.session_state.api_key_invalid = False
+        else:
+            st.session_state.api_key_invalid = True
+            st.error("Invalid API key. Please enter a valid Groq API key.")
+            st.session_state.groq_api_key = ''
+
+    return st.session_state.groq_api_key
