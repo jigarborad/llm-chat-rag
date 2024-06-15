@@ -1,20 +1,20 @@
 import os
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import FAISS
 from langchain.chains.question_answering import load_qa_chain
-from langchain_community.callbacks import get_openai_callback
+from langchain_groq import ChatGroq
+from langchain_huggingface import HuggingFaceEmbeddings
 
-class OpenAIModel:
+class GroqModel:
     def __init__(self, api_key):
         self.api_key = api_key
-        self.available_models = ["gpt-3.5-turbo"]
+        self.available_models = ["llama3-70b-8192", "mixtral-8x7b-32768", "llama3-8b-8192"]
 
     def get_available_models(self):
         return self.available_models
 
-    def open_ai_embedding(self, vector_store_path, chunks):
-        embeddings = OpenAIEmbeddings(openai_api_key=self.api_key)
-        vector_store_full_path = f"VectorStore_{vector_store_path[:-4]}_openaiembeddings"
+    def local_embedding(self, vector_store_path, chunks):
+        embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+        vector_store_full_path = f"VectorStore_{vector_store_path[:-4]}_huggingfaceembeddings"
         if os.path.exists(vector_store_full_path):
             VectorStore = FAISS.load_local(vector_store_full_path, embeddings, allow_dangerous_deserialization=True)
         else:
@@ -25,8 +25,7 @@ class OpenAIModel:
     def query_model(self, model_name, query, VectorStore):
         if model_name not in self.available_models:
             raise ValueError("Model not available")
-        docs = VectorStore.similarity_search(query=query, k=2)
-        chain = load_qa_chain(llm=ChatOpenAI(model_name=model_name, openai_api_key=self.api_key), chain_type="stuff")
-        with get_openai_callback() as cb:
-            response = chain.invoke(input={"input_documents": docs, "question": query})["output_text"]
+        docs = VectorStore.similarity_search(query=query, k=3)
+        chain = load_qa_chain(llm=ChatGroq(model_name=model_name, api_key=self.api_key), chain_type="stuff")
+        response = chain.invoke(input={"input_documents": docs, "question": query})["output_text"]
         return response
