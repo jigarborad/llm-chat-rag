@@ -65,6 +65,18 @@ Welcome to the LLM Chat App, a powerful and interactive web application that all
 **Interactive chat interface to ask questions about the PDF content.**
 ![Chat Interface](images/chat_interface.png)
 
+
+Certainly! Here's how you can incorporate a sarcastic emoji:
+
+---
+
+## Inspiration and Sources
+
+This project draws inspiration from and references the following sources:
+- [Prompt Engineering YouTube Tutorial](https://www.youtube.com/watch?v=RIWbalZ7sTo&t=509s&ab_channel=PromptEngineering): This tutorial provided guidance on building interactive chat applications with language models using Streamlit and Python.
+
+And of course, couldn't have done it without the wisdom imparted by ChatGPT 🙄.
+
 ## Custom CSS
 
 The app includes custom CSS for a complete redesign, ensuring a modern and user-friendly interface. The styles are defined within the `styles.py` file and applied in `app.py`.

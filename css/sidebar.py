@@ -8,7 +8,6 @@ def render_sidebar():
     with st.sidebar:
         st.title("LLM Chat App")
         st.markdown('''Welcome to the LLM Chat App! Please enter your name and start chatting.''')
-        add_vertical_space(1)
         # Model selection
         with st.expander("Model Selection and API Key Input", expanded=True):
             service = st.selectbox(
@@ -35,9 +34,7 @@ def render_sidebar():
                     options=groq_model.get_available_models(),
                     placeholder="Select model...",
                 )
-        add_vertical_space(1)
         st.markdown('''
-                    
                     ## About the app
                     The app is powered by:
                     - Streamlit
@@ -47,7 +44,6 @@ def render_sidebar():
                     - FAISS
                     - Huggingface
                     ''')
-        add_vertical_space(1)
         st.write("Made with ❤️ by [Jigar](https://github.com/jigarborad)")
 
         

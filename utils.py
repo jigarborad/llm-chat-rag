@@ -23,7 +23,7 @@ def get_openai_key():
             st.session_state.api_key_invalid = True
             st.error("Invalid API key. Please enter a valid OpenAI API key starting with 'sk-'.")
             st.session_state.openai_api_key = ''
-
+    st.markdown("[Create OpenAI API Key here](https://platform.openai.com/settings/profile?tab=api-keys)")
     return st.session_state.openai_api_key
 
 def get_groq_key():
@@ -49,5 +49,5 @@ def get_groq_key():
             st.session_state.api_key_invalid = True
             st.error("Invalid API key. Please enter a valid Groq API key.")
             st.session_state.groq_api_key = ''
-
+    st.markdown("[Create Groq API Key here](https://console.groq.com/keys)")
     return st.session_state.groq_api_key
