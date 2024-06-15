@@ -44,8 +44,11 @@ def render_sidebar():
                     - LangChain
                     - OpenAI
                     - Groq
+                    - FAISS
+                    - Huggingface
                     ''')
-        
+        add_vertical_space(1)
+        st.write("Made with ❤️ by [Jigar](https://github.com/jigarborad)")
 
         
         return model, api_key
