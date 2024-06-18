@@ -1,4 +1,6 @@
 import streamlit as st
+import base64
+from pathlib import Path
 
 def get_openai_key():
     if 'openai_api_key' not in st.session_state:
@@ -51,3 +53,9 @@ def get_groq_key():
             st.session_state.groq_api_key = ''
     st.markdown("[Create Groq API Key here](https://console.groq.com/keys)")
     return st.session_state.groq_api_key
+
+def icon_loader(img_path):
+        img_bytes = Path(img_path).read_bytes()
+        encoded = base64.b64encode(img_bytes).decode()
+        img_html = "<img src='data:image/png;base64,{}' class='img-fluid icons-images'>".format(encoded)
+        return img_html

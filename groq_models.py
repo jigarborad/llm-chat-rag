@@ -22,10 +22,14 @@ class GroqModel:
             VectorStore.save_local(vector_store_full_path)
         return VectorStore
 
-    def query_model(self, model_name, query, VectorStore):
+    def query_model(self, model_name, query, VectorStore, history):
         if model_name not in self.available_models:
             raise ValueError("Model not available")
         docs = VectorStore.similarity_search(query=query, k=3)
         chain = load_qa_chain(llm=ChatGroq(model_name=model_name, api_key=self.api_key), chain_type="stuff")
-        response = chain.invoke(input={"input_documents": docs, "question": query})["output_text"]
+        
+        # Combine history and current query for the model input
+        input_text = "\n".join([f"{h['role']}: {h['content']}" for h in history]) + f"\nuser: {query}"
+        
+        response = chain.invoke(input={"input_documents": docs, "question": input_text})["output_text"]
         return response
