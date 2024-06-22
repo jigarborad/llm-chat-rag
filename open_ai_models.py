@@ -22,11 +22,15 @@ class OpenAIModel:
             VectorStore.save_local(vector_store_full_path)
         return VectorStore
 
-    def query_model(self, model_name, query, VectorStore):
+    def query_model(self, model_name, query, VectorStore, history):
         if model_name not in self.available_models:
             raise ValueError("Model not available")
         docs = VectorStore.similarity_search(query=query, k=2)
         chain = load_qa_chain(llm=ChatOpenAI(model_name=model_name, openai_api_key=self.api_key), chain_type="stuff")
+        
+        # Combine history and current query for the model input
+        input_text = "\n".join([f"{h['role']}: {h['content']}" for h in history]) + f"\nuser: {query}"
+        
         with get_openai_callback() as cb:
-            response = chain.invoke(input={"input_documents": docs, "question": query})["output_text"]
+            response = chain.invoke(input={"input_documents": docs, "question": input_text})["output_text"]
         return response

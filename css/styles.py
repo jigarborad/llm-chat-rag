@@ -48,6 +48,46 @@ custom_css = """
         .stSpinner {
             border-top-color: #2e7bcf;
         }
+        .user-message-container {
+            display: flex; 
+            justify-content: flex-end; 
+            margin-bottom: 10px;
+        }
+        
+        .assistant-message-container {
+            display: flex; 
+            justify-content: flex-start; 
+            margin-bottom: 10px;
+        }
+
+        /* User message styles */
+        .user-message {
+            padding: 5px; 
+            background-color: #2E4053; 
+            border-radius: 10px; 
+            max-width: 80%; 
+            color: white;
+        }
+
+        /* Assistant message styles */
+        .assistant-message {
+            justify-content: flex-start; 
+            background-color: #E0E0E0; /* Light gray background */
+            color: #262730; /* Dark text color */
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .icons-images {
+            vertical-align: middle; 
+            width: 30px; 
+            height: 30px; 
+            margin-right: 10px; 
+            margin-left: 10px;
+        }
     </style>
 """
 
