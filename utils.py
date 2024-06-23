@@ -44,7 +44,7 @@ def get_groq_key():
         ).strip()
 
     if api_key_input:
-        if len(api_key_input) > 0:  # Add your Groq API key validation logic here
+        if api_key_input.startswith("gsk_"):  # Add your Groq API key validation logic here
             st.session_state.groq_api_key = api_key_input
             st.session_state.api_key_invalid = False
         else:

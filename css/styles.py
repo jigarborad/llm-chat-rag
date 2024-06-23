@@ -98,4 +98,4 @@ upload_banner = """
     </div>
 """
 
-header = """<h1 class="fade-in">Chat with LLM &#x1F916;</h1>"""
+header = """<h1 class="fade-in">Chat with PDF &#x1F916;</h1>"""
