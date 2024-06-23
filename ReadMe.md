@@ -15,6 +15,7 @@ Welcome to the LLM Chat App, a powerful and interactive web application that all
 - **Custom CSS:** Enjoy a modern and visually appealing interface with a custom-designed CSS.
 - **Support for Multiple Models:** Choose between OpenAI and Groq models based on your preference and API key.
 - **Groq Models:** Currently free to use.
+- **Custom Instructions:** One give customs instruction(prompts) if not satisfied with default.
 - **Embeddings:** Use HuggingFace embeddings for Groq models and OpenAI embeddings for OpenAI models.
 
 ## Technologies Used
@@ -51,7 +52,11 @@ Welcome to the LLM Chat App, a powerful and interactive web application that all
    - Click on "Upload a PDF file" and select a PDF from your local machine.
    - The app will extract and process the text from the PDF.
 
-4. **Ask Questions:**
+4. **Give custom instructions(Optional)**
+   - Click on the Custom instruction
+   - If custom instruction hasa been give Chatbot will follow that otherwise default instruction will be followed.
+
+5. **Ask Questions:**
    - Enter your question in the text input field.
    - The app will perform a similarity search on the PDF content and provide an answer based on the relevant text.
 
@@ -66,7 +71,6 @@ Welcome to the LLM Chat App, a powerful and interactive web application that all
 ![Chat Interface](images/chat_interface.png)
 
 
-Certainly! Here's how you can incorporate a sarcastic emoji:
 
 ---
 

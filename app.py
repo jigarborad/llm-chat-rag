@@ -4,7 +4,7 @@ from chat import ChatApp
 
 def main():
     # Set page config
-    st.set_page_config(page_title="LLM Chat App", page_icon=":robot_face:", layout="centered")
+    st.set_page_config(page_title="PDF Chat App", page_icon=":robot_face:", layout="centered")
 
     # Custom CSS for complete redesign
     st.markdown(styles.custom_css, unsafe_allow_html=True)

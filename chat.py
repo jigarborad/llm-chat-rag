@@ -3,7 +3,7 @@ import openai
 from data_manager import DataManager
 from open_ai_models import OpenAIModel
 from groq_models import GroqModel
-from  utils import icon_loader
+from utils import icon_loader
 
 class ChatApp:
     def __init__(self, api_key, model_name):
@@ -26,18 +26,34 @@ class ChatApp:
 
     def run(self):
         vector_store_path, chunks, uploaded_file = DataManager.pdf_uploader()
+        # Initialize chat history
+        if "messages" not in st.session_state:
+            st.session_state.messages = []
         if uploaded_file is not None:
             self.vector_store_path = vector_store_path
             self.chunks = chunks
+            
             if not self.load_model():
                 return
-
             st.success(f'PDF "{uploaded_file.name}" uploaded and processed successfully!')
+            default_instructions = (
+                    "You are a PDF chat bot. Answer questions by reading the provided PDF documents with the context and source."
+                    "if you greets you, then answer it"
+                    "If a question is outside the scope of these documents, respond with 'This question is not related to the document."
+                    "Please ask questions related to the PDF.")
             
-            # Initialize chat history
-            if "messages" not in st.session_state:
-                st.session_state.messages = []
-
+            with st.popover("Custom Instructions"):
+                # User input for custom prompt template
+                custom_template = st.text_area("Enter your custom instructions", placeholder="default_instructions are\n\n" + default_instructions, height=100)
+                
+            # Check if current custom template is different from the stored one
+            if "custom_template" in st.session_state and st.session_state.custom_template != custom_template:
+                st.session_state.custom_template = custom_template
+                st.session_state.messages = []  # Clear chat history
+            
+            # If no custom template stored yet, store the current one
+            if "custom_template" not in st.session_state:
+                st.session_state.custom_template = custom_template or default_instructions
             # Display chat messages from history on app rerun
             for message in st.session_state.messages:
                 if message["role"] == "user":
@@ -71,7 +87,11 @@ class ChatApp:
 
                     # Query model including the conversation history
                     history = [{"role": "user", "content": msg["content"]} if msg["role"] == "user" else {"role": "assistant", "content": msg["content"]} for msg in st.session_state.messages]
-                    response = self.model.query_model(self.model_name, prompt, self.vector_store, history)
+                    template = (st.session_state.custom_template or default_instructions) + "\n\n"+"{history}\n\nuser: {query}"
+                    
+
+                    with st.spinner("Thinking... ... ..."):
+                        response = self.model.query_model(self.model_name, prompt, self.vector_store, history, template)
 
                     # Add assistant's response to chat history
                     st.session_state.messages.append({"role": "assistant", "content": response})

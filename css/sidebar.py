@@ -6,7 +6,7 @@ from groq_models import GroqModel
 
 def render_sidebar():
     with st.sidebar:
-        st.title("LLM Chat App")
+        st.title("PDF Chat App")
         st.markdown('''Welcome to the LLM Chat App! Please enter your name and start chatting.''')
         # Model selection
         with st.expander("Model Selection and API Key Input", expanded=True):
