@@ -1,5 +1,6 @@
 custom_css = """
     <style>
+    
         body {
             background-color: #f0f2f6;
             font-family: 'Helvetica Neue', sans-serif;
@@ -11,22 +12,11 @@ custom_css = """
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .stTextInput>div>div>input {
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            width: 100%;
-        }
-        .stButton>button {
-            background-color: #2e7bcf;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .stButton>button:hover {
-            background-color: #1e5bbf;
+        .st-emotion-cache-svoq73 {
+            height: 400px;
+            overflow: auto;
+            display: flex;
+            flex-direction: column-reverse;
         }
         .sidebar .sidebar-content {
             background-color: #2e7bcf;
@@ -58,6 +48,7 @@ custom_css = """
             display: flex; 
             justify-content: flex-start; 
             margin-bottom: 10px;
+            
         }
 
         /* User message styles */
@@ -67,6 +58,7 @@ custom_css = """
             border-radius: 10px; 
             max-width: 80%; 
             color: white;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
 
         /* Assistant message styles */
@@ -79,6 +71,7 @@ custom_css = """
             margin-bottom: 10px;
             max-width: 80%;
             word-wrap: break-word;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         }
 
         .icons-images {

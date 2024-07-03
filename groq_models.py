@@ -4,6 +4,7 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain_groq import ChatGroq
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.prompts import PromptTemplate
+from groq import Groq
 
 class GroqModel:
     def __init__(self, api_key):
@@ -33,3 +34,20 @@ class GroqModel:
         
         response = chain.invoke(input={"input_documents": docs, "question": input_text})["output_text"]
         return response
+
+    def transcription_model(self, audio):
+        client = Groq(api_key=self.api_key)
+        with open("microphone-results.wav", "wb") as f:
+            f.write(audio.get_wav_data())
+
+        # Use Groq API for transcription
+        with open("microphone-results.wav", "rb") as audio_file:
+            transcription = client.audio.transcriptions.create(
+            file=("microphone-results.wav", audio_file),
+            model="whisper-large-v3",
+            prompt="Specify context or spelling",  # Optional
+            response_format="json",  # Optional
+            language="en",  # Optional
+            temperature=0.0  # Optional
+        )
+        return transcription
