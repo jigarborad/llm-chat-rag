@@ -6,8 +6,13 @@ PyPDF2==3.0.1
 openai==1.32.0
 langchain==0.2.3
 langchain-community==0.2.4
-faiss-cpu==1.7.4
-altair==4.0.0
 langchain-openai==0.1.8
 langchain-groq==0.1.5
 langchain-huggingface==0.0.3
+faiss-cpu==1.7.4
+altair==4.0.0
+transformers==4.42.3
+sentence-transformers==3.0.1
+SpeechRecognition==3.10.4
+streamlit-extras==0.4.3
+streamlit-float==0.3.5

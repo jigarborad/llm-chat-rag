@@ -62,7 +62,7 @@ class ChatApp:
         
         vector_store_path, chunks, uploaded_file = DataManager.pdf_uploader()
         # Initialize chat history
-        cc= st.container(height=400, border=False)
+        cc= st.container(height=350, border=False)
         with cc:
             if "messages" not in st.session_state:
                 st.session_state.messages = []
@@ -81,25 +81,7 @@ class ChatApp:
 
                 
 
-                # Display chat messages from history on app rerun
-                chat_history_container = st.container()
-                with chat_history_container:
-                    for message in st.session_state.messages:
-                        if message["role"] == "user":
-                            st.markdown(
-                                f'<div class="user-message-container">'
-                                f'<div class="user-message">{message["content"]}</div>'
-                                f'{icon_loader("images/profile.png")}</div>',
-                                unsafe_allow_html=True
-                            )
-                        elif message["role"] == "assistant":
-                            st.markdown(
-                                f'<div class="assistant-message-container">'
-                                f'{icon_loader("images/bot.png")}'
-                                f'<div class="assistant-message">{message["content"]}</div>'
-                                f'</div>',
-                                unsafe_allow_html=True
-                            )
+                
                 # Initialize microphone state if not already present
                 if "mic_active" not in st.session_state:
                     st.session_state.mic_active = False
@@ -136,7 +118,25 @@ class ChatApp:
                             st.session_state.custom_template = custom_template or default_instructions
                     # Float button container
                 chat_input_container.float('bottom: 5px; background-color:white; display: flex; justify-content: center; margin: 0 auto; padding: 10px; border-radius: 10px; border: 1; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;')
-                    
+                # Display chat messages from history on app rerun
+                chat_history_container = st.container()
+                with chat_history_container:
+                    for message in st.session_state.messages:
+                        if message["role"] == "user":
+                            st.markdown(
+                                f'<div class="user-message-container">'
+                                f'<div class="user-message">{message["content"]}</div>'
+                                f'{icon_loader("images/profile.png")}</div>',
+                                unsafe_allow_html=True
+                            )
+                        elif message["role"] == "assistant":
+                            st.markdown(
+                                f'<div class="assistant-message-container">'
+                                f'{icon_loader("images/bot.png")}'
+                                f'<div class="assistant-message">{message["content"]}</div>'
+                                f'</div>',
+                                unsafe_allow_html=True
+                            )
                 if user_query:
                     # Add user message to chat history
                     st.session_state.messages.append({"role": "user", "content": user_query})

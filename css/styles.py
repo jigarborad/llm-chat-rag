@@ -7,8 +7,7 @@ custom_css = """
             color: #333;
         }
         .main {
-            background: linear-gradient(to right, #ece9e6, #ffffff);
-            padding: 20px;
+            background-color: #ece9e6;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
@@ -18,15 +17,30 @@ custom_css = """
             display: flex;
             flex-direction: column-reverse;
         }
-        .sidebar .sidebar-content {
-            background-color: #2e7bcf;
-            color: white;
+        .st-emotion-cache-12fmjuu {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            height: 0;
+            background: rgb(255, 255, 255);
+            outline: none;
+            z-index: 999990;
+            display: block;
+        }
+        [data-testid=stSidebar] {
+            background-color: #f9f9f9;
+            border-right: solid 0.1em;
+            border-right-color: black;
+            width: auto;
+            color: black;
+        }
+        [data-testid=stExpander] {
+            background-color: #ededed;
+            color: black;
         }
         .sidebar .sidebar-content a {
             color: white;
-        }
-        h1 {
-            color: #2e7bcf;
         }
         .card {
             background-color: white;
@@ -48,6 +62,7 @@ custom_css = """
             display: flex; 
             justify-content: flex-start; 
             margin-bottom: 10px;
+            
             
         }
 
@@ -81,14 +96,85 @@ custom_css = """
             margin-right: 10px; 
             margin-left: 10px;
         }
+        .header-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .blank-header-container {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ece9e6;
+            padding: 62px 300px;
+            z-index: 1001;
+        }
+        .blank-footer-container {
+            position: fixed;
+            bottom: 0px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ece9e6;
+            padding: 35px 300px;
+            z-index: 1001;
+        }
+        .header-title {
+            margin-right: 10px;
+        }
+        .info-button {
+            font-size: 24px;
+            cursor: pointer;
+            fill: #1a5276;
+            margin-left: 5px;
+            color: white;
+            
+        }
+        .info-button:hover {
+            fill: #3e92cc;
+            color: black;
+        }
+        /* Tooltip container */
+        .tooltip {
+            position: sticky;
+            display: inline-block;
+        }
+        /* Tooltip text */
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: max-content;  /* Adjust width as needed */
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 10px;  /* Adjust padding as needed */
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -calc(50% + 10px);  /* Adjust margin based on padding */
+            opacity: 0;
+            transition: opacity 0.3s;
+            
+            
+        }
+        /* Tooltip text visibility on hover */
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 70%;
+        }
+        div.block-container{
+            padding-top:2rem;
+        }
     </style>
 """
 
-upload_banner = """
-    <div class="card fade-in">
-        <h2>Upload your PDF</h2>
-        <p>Upload a PDF file and ask questions related to its content.</p>
-    </div>
-"""
-
-header = """<h1 class="fade-in">Chat with PDF &#x1F916;</h1>"""
+header = """<div class="header-container"><h3 class="header-title">Chat with PDF &#x1F916;</h3><div class="tooltip"><svg class="info-button" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg><span class="tooltiptext">Enter the relevant API keys and upload PDFs on the left sidebar.</span></div></div>"""
+blank_header = """<div class="blank-header-container"></div>"""
+blank_footer = """<div class="blank-footer-container"></div>"""

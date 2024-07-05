@@ -1,7 +1,6 @@
 import streamlit as st
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from PyPDF2 import PdfReader
-import time
 class DataManager:
     @staticmethod
     def pdf_uploader():

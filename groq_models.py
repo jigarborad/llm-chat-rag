@@ -50,4 +50,5 @@ class GroqModel:
             language="en",  # Optional
             temperature=0.0  # Optional
         )
+        os.remove("microphone-results.wav")
         return transcription
