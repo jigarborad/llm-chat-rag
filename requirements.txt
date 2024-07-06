@@ -16,3 +16,4 @@ sentence-transformers==3.0.1
 SpeechRecognition==3.10.4
 streamlit-extras==0.4.3
 streamlit-float==0.3.5
+chime==0.7.0

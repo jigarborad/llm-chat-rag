@@ -25,6 +25,7 @@ def main():
     blank_footer = st.container()
     with blank_footer:
         st.markdown(styles.blank_footer, unsafe_allow_html=True)    
+    
     blank_footer.float('bottom:0;')
     if api_key and model_name:
         chat_app = ChatApp(api_key, model_name, vector_store_path, chunks, uploaded_file)

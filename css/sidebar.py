@@ -4,6 +4,7 @@ import utils
 from open_ai_models import OpenAIModel
 from groq_models import GroqModel
 from data_manager import DataManager
+import chime
 def render_sidebar():
     with st.sidebar:
         st.title("PDF Chat App")
@@ -30,7 +31,7 @@ def render_sidebar():
                 api_key = utils.get_groq_key()
                 groq_model = GroqModel(api_key)
                 model = st.selectbox(
-                    label="Which model do you want to use?",
+                    label="Which model do you want to use?a",
                     options=groq_model.get_available_models(),
                     placeholder="Select model...",
                 )
