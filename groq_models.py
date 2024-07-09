@@ -4,6 +4,7 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain_groq import ChatGroq
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.prompts import PromptTemplate
+from groq import Groq
 
 class GroqModel:
     def __init__(self, api_key):

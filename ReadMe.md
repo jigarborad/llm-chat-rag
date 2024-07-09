@@ -60,6 +60,13 @@ Welcome to the LLM Chat App, a powerful and interactive web application that all
    - Enter your question in the text input field.
    - The app will perform a similarity search on the PDF content and provide an answer based on the relevant text.
 
+6. **Clear the History:**
+    - Click on the broom (clear the history) button
+
+7. **Change the models:**
+    - Click on the models available on the sidebar to change the models
+    - Enter Apis if asked.
+
 ## Screenshots
 **Workflow of RAG**
 ![Workflow](images/how_this_works.png)

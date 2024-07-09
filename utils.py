@@ -1,7 +1,6 @@
 import streamlit as st
 import base64
 from pathlib import Path
-
 def get_openai_key():
     if 'openai_api_key' not in st.session_state:
         st.session_state.openai_api_key = ''
