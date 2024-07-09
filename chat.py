@@ -112,18 +112,19 @@ class ChatApp:
                         with st.popover(label= ":pencil2:",help="Custom Instructions (Prompts)",use_container_width=True):
                             # User input for custom prompt template
                             custom_template = st.text_area("Enter your custom instructions", placeholder="default_instructions are\n\n" + default_instructions, height=100)
-
+                            
                         # Check if current custom template is different from the stored one
                         if "custom_template" in st.session_state and st.session_state.custom_template != custom_template:
                             st.session_state.custom_template = custom_template
                             st.session_state.messages = []  # Clear chat history
-
+                            chime.warning()
                         # If no custom template stored yet, store the current one
                         if "custom_template" not in st.session_state:
                             st.session_state.custom_template = custom_template or default_instructions
                     with cols1[3]:
                         if st.button(":broom:", help="Clear chat history",use_container_width=True):
                             st.session_state.messages = []
+                            chime.warning()
                     # Float button container
                 chat_input_container.float('bottom: 1%; background-color:white; display: flex; justify-content: center; margin: 0 auto; padding: 10px; border-radius: 10px; border: 1; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;')
                 # Display chat messages from history on app rerun
