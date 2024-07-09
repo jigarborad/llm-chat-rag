@@ -3,7 +3,8 @@ from streamlit_extras.add_vertical_space import add_vertical_space
 import utils
 from open_ai_models import OpenAIModel
 from groq_models import GroqModel
-
+from data_manager import DataManager
+import chime
 def render_sidebar():
     with st.sidebar:
         st.title("PDF Chat App")
@@ -30,10 +31,14 @@ def render_sidebar():
                 api_key = utils.get_groq_key()
                 groq_model = GroqModel(api_key)
                 model = st.selectbox(
-                    label="Which model do you want to use?",
+                    label="Which model do you want to use?a",
                     options=groq_model.get_available_models(),
                     placeholder="Select model...",
                 )
+          # Check if API key is entered before calling pdf_uploader
+            vector_store_path, chunks, uploaded_file = None, None, None
+            if api_key:
+                vector_store_path, chunks, uploaded_file = DataManager.pdf_uploader()
         st.markdown('''
                     ## About the app
                     The app is powered by:
@@ -47,4 +52,4 @@ def render_sidebar():
         st.write("Made with ❤️ by [Jigar](https://github.com/jigarborad)")
 
         
-        return model, api_key
+        return model, api_key,vector_store_path, chunks, uploaded_file
