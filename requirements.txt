@@ -1,5 +1,5 @@
 tiktoken==0.7.0
-streamlit==1.35.0
+streamlit==1.36.0
 streamlit-extras==0.4.3
 python-dotenv==1.0.0
 PyPDF2==3.0.1
