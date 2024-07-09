@@ -1,7 +1,6 @@
 import streamlit as st
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from PyPDF2 import PdfReader
-import chime
 
 class DataManager:
     @staticmethod
@@ -14,7 +13,6 @@ class DataManager:
         
         # Check if a new file has been uploaded
         if uploaded_file and uploaded_file != st.session_state.uploaded_file:
-            chime.success()  # Chime when file is uploaded successfully
             st.session_state.uploaded_file = uploaded_file  # Update session_state
         
         if uploaded_file is not None:

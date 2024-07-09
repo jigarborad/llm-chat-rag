@@ -4,7 +4,6 @@ import utils
 from open_ai_models import OpenAIModel
 from groq_models import GroqModel
 from data_manager import DataManager
-import chime
 def render_sidebar():
     with st.sidebar:
         st.title("PDF Chat App")

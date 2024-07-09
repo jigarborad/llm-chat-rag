@@ -9,7 +9,7 @@ Welcome to the LLM Chat App, a powerful and interactive web application that all
 ## Features ✨
 
 - **Upload PDFs:** Easily upload your PDF documents for processing.
-- **Interactive Chat:** Ask questions related to the content of the uploaded PDF with text input and microphone and get responses from an LLM.
+- **Interactive Chat:** Ask questions related to the content of the uploaded PDF and get responses from an LLM.
 - **Text Extraction and Chunking:** Extract text from PDFs and split it into manageable chunks for efficient processing.
 - **Vector Store:** Utilize FAISS to create and manage vector stores for fast similarity searches.
 - **Custom CSS:** Enjoy a modern and visually appealing interface with a custom-designed CSS.
@@ -27,8 +27,6 @@ Welcome to the LLM Chat App, a powerful and interactive web application that all
 - **FAISS:** Efficient vector search for handling large text data.
 - **HuggingFace:** Providing embeddings for Groq models.
 - **OpenAI Embeddings:** Used for OpenAI models.
-- **SpeechRecognition:** Used to take input from microphone
-- **Chime:** For notification sound
 
 ## Available Models
 
@@ -68,9 +66,6 @@ Welcome to the LLM Chat App, a powerful and interactive web application that all
 7. **Change the models:**
     - Click on the models available on the sidebar to change the models
     - Enter Apis if asked.
-
-8. **Use microphone as input:**
-    - Click on mic button to give input from mic instead of writing it (Only available for Groq models)
 
 ## Screenshots
 **Workflow of RAG**
